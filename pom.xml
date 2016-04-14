@@ -16,6 +16,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- TESTING DEPENDENCIES -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -24,15 +25,41 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+		<!-- TESTING DEPENDENCIES -->
+
+		<!-- HIBERNATE DEPENDENCIES -->
+		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator-cdi</artifactId>
-			<version>5.0.2.Final</version>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.2.4.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.1.0.Final</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.0.Final</version>
+			<version>5.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>5.1.0.Final</version>
 		</dependency>
 
 		<dependency>
@@ -41,6 +68,14 @@
 			<version>2.3.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<!-- HIBERNATE DEPENDENCIES -->
+
+		<!-- CDI DEPENDENCIES -->
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet-core</artifactId>
@@ -52,7 +87,9 @@
 			<artifactId>weld-core-impl</artifactId>
 			<version>2.1.2.Final</version>
 		</dependency>
+		<!-- CDI DEPENDENCIES -->
 
+		<!-- GENERAL DEPENDENCIES -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -66,21 +103,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
-		</dependency>
-
-		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
 		</dependency>
 
 		<dependency>
@@ -88,7 +113,7 @@
 			<artifactId>javassist</artifactId>
 			<version>3.18.1-GA</version> <!-- or latest version -->
 		</dependency>
-
+		<!-- GENERAL DEPENDENCIES -->
 	</dependencies>
 
 	<build>
@@ -105,6 +130,14 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.18</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>true</downloadJavadocs>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -115,6 +148,6 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-		</plugins>		
+		</plugins>
 	</build>
 </project>
