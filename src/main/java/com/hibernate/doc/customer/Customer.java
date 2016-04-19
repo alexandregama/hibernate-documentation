@@ -2,6 +2,7 @@ package com.hibernate.doc.customer;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +39,34 @@ public class Customer {
 	@Type(type = "java.sql.Blob")
 	@Column(name = "profile_description")
 	private String profileDescription;
+	
+//	@Enumerated(EnumType.STRING) We can use EnumType.STRING or we are able to use a Convert from JPA 2.1
+	@Convert(converter = GenderEnumToStringConverter.class) // We must be sure to not mark the attribute as Enumerated
+	private Gender gender;
+	
+	public enum Gender {
+		MALE("M"), FEMALE("F");
+		
+		private String code;
+		
+		Gender(String code) {
+			this.code = code;
+		}
+		
+		public static Gender getFromCode(String code) {
+			if (code != null && code == "M") {
+				return MALE;
+			}
+			if (code != null && code == "F") {
+				return FEMALE;
+			}
+			return null;
+		}
+		
+		public String getCode() {
+			return code;
+		}
+	}
 
 	private Customer() {
 	}
@@ -100,6 +129,14 @@ public class Customer {
 
 	public void setProfileDescription(String profileDescription) {
 		this.profileDescription = profileDescription;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public static class CustomerBuilder {
