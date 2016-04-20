@@ -1,6 +1,8 @@
 package com.hibernate.doc.customer.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,6 +13,8 @@ import org.junit.Test;
 
 import com.hibernate.doc.configuration.HibernateUtil;
 import com.hibernate.doc.customer.Customer;
+import com.hibernate.doc.customer.Customers;
+import com.hibernate.doc.customer.HibernateCustomersDao;
 
 public class CustomerTest {
 
@@ -71,6 +75,21 @@ public class CustomerTest {
 		
 		customers.save(alexandre);
 		customers.save(gama);
+	}
+	
+	@Test
+	public void shouldRetrieveAListWithTwoCustomers() throws Exception {
+		Customer alexandre = Customer.builder().withFirstName("Ale").withLastName("Gama").withUsername("gama").build();
+		Customer gama = Customer.builder().withFirstName("Ale").withLastName("Gama").withUsername("ale").build();
+		
+		Customers customers = new HibernateCustomersDao(session);
+		
+		customers.save(alexandre);
+		customers.save(gama);
+
+		List<Customer> listOfCustomers = customers.list();
+		
+		assertEquals(listOfCustomers.size(), 2);
 	}
 	
 }
