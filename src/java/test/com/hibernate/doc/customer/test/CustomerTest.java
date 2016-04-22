@@ -2,6 +2,7 @@ package com.hibernate.doc.customer.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -91,5 +92,21 @@ public class CustomerTest {
 		
 		assertEquals(listOfCustomers.size(), 2);
 	}
-	
+
+
+	@Test
+	public void shouldSaveANewCustomerWithCreatedAtDate() throws Exception {
+		Calendar somePastDate = Calendar.getInstance();
+		somePastDate.set(2016, 02, 12);
+		Customer customer = Customer.builder().withFirstName("Alexandre").withLastName("Gama").createdAt(somePastDate).build();
+		
+		Customers customers = new HibernateCustomersDao(session);
+		
+		customers.save(customer);
+		
+		Customer customerSaved = customers.findBy(customer.getId());
+		
+		assertEquals("Alexandre", customerSaved.getFirstName());
+		assertEquals("Gama", customerSaved.getLastName());
+	}
 }

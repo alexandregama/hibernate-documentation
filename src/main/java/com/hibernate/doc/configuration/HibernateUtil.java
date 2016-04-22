@@ -13,7 +13,7 @@ public class HibernateUtil {
 			    .setProperty(AvailableSettings.URL, "jdbc:mysql://localhost:3306/hibernate-documentation")
 			    .setProperty(AvailableSettings.USER, "root")
 			    .setProperty(AvailableSettings.PASS, "")
-			    .setProperty(AvailableSettings.HBM2DDL_AUTO, "drop-and-create")
+			    .setProperty(AvailableSettings.HBM2DDL_AUTO, "update")
 			    .setProperty(AvailableSettings.SHOW_SQL, "true")
 			    .setProperty(AvailableSettings.FORMAT_SQL, "true")
 			    .addAnnotatedClass(com.hibernate.doc.customer.Customer.class);

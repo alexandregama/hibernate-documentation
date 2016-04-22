@@ -1,5 +1,7 @@
 package com.hibernate.doc.customer;
 
+import java.util.Calendar;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -8,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.Type;
 
 @Table(name = "customers", uniqueConstraints = {@UniqueConstraint(columnNames = {"first_name", "last_name"})})
@@ -43,6 +49,12 @@ public class Customer {
 //	@Enumerated(EnumType.STRING) We can use EnumType.STRING or we are able to use a Convert from JPA 2.1
 	@Convert(converter = GenderEnumToStringConverter.class) // We must be sure to not mark the attribute as Enumerated
 	private Gender gender;
+	
+	// Hibernate automatically set property to insertable=false or updatable=false when we are using @Generated with GenerationTime
+	@Generated(GenerationTime.INSERT)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "created_at")
+	private Calendar createdAt;
 	
 	public enum Gender {
 		MALE("M"), FEMALE("F");
@@ -139,6 +151,14 @@ public class Customer {
 		this.gender = gender;
 	}
 
+	public Calendar getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Calendar createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public static class CustomerBuilder {
 		
 		private Customer customer;
@@ -169,6 +189,11 @@ public class Customer {
 		
 		public CustomerBuilder inStreetNumber(String streetNumber) {
 			this.customer.setStreetNumber(streetNumber);
+			return this;
+		}
+		
+		public CustomerBuilder createdAt(Calendar date) {
+			this.customer.setCreatedAt(date);
 			return this;
 		}
 		
