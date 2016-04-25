@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 @Table(name = "Shippings")
 @Entity
 public class Shipping {
@@ -23,6 +25,9 @@ public class Shipping {
 
 	@Column(name = "width")
 	private Long width;
+	
+	@Formula(value = "weight * height * width")
+	private Long totalArea;
 	
 	public Shipping(Long weight, Long height, Long width) {
 		this.weight = weight;
@@ -56,6 +61,14 @@ public class Shipping {
 
 	public void setWidth(Long width) {
 		this.width = width;
+	}
+
+	public Long getTotalArea() {
+		return totalArea;
+	}
+
+	public void setTotalArea(Long totalArea) {
+		this.totalArea = totalArea;
 	}
 
 }

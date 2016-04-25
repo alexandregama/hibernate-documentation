@@ -48,6 +48,7 @@ public class ShippingTest {
 		Optional<Shipping> shippingFound = shippings.findBy(shipping.getId());
 		
 		assertTrue(shippingFound.isPresent());
+		assertEquals(100L, shippingFound.get().getTotalArea(), 0);
 	}
 	
 }
