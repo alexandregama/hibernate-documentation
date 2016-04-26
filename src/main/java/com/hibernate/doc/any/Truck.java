@@ -14,6 +14,13 @@ public class Truck implements Vehicle {
 	private String modelNumber;
 	private Long engineCapacity;
 	private Long trunkVolumeCapacity;
+	
+	public Truck(final Long buyingPrice, final String modelNumber, final Long engineCapacity, final Long trunkVolumeCapacity) {
+		this.buyingPrice = buyingPrice;
+		this.modelNumber = modelNumber;
+		this.engineCapacity = engineCapacity;
+		this.trunkVolumeCapacity = trunkVolumeCapacity;
+	}
 
 	@Override
 	public Long getBuyingPrice() {
