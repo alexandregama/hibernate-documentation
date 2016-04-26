@@ -18,6 +18,8 @@ public class HibernateUtil {
 			    .setProperty(AvailableSettings.FORMAT_SQL, "true")
 			    .addAnnotatedClass(com.hibernate.doc.customer.Customer.class)
 				.addAnnotatedClass(com.hibernate.doc.user.User.class)
+				.addAnnotatedClass(com.hibernate.doc.any.Bus.class)
+				.addAnnotatedClass(com.hibernate.doc.any.Truck.class)
 				.addAnnotatedClass(com.hibernate.doc.shipping.Shipping.class);
 
 		SessionFactory sessionFactory = cfg.buildSessionFactory();
