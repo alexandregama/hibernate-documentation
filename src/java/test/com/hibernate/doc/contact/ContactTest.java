@@ -58,7 +58,8 @@ private Session session;
 		Contacts contacts = new HibernateContactDao(session);
 		
 		Name name = new Name("Alexandre", "Gama");
-		Address address = new Address("First line 1", "Second line 2");
+		ZipCode withoutZipcode = null;
+		Address address = new Address("First line 1", "Second line 2", withoutZipcode);
 		Contact contact = new Contact(name, address);
 		
 		contacts.save(contact);
