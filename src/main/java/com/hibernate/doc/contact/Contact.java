@@ -16,12 +16,20 @@ public class Contact {
 	@Embedded
 	private Name name;
 	
+	@Embedded
+	private Address workAddress;
+	
 	@Deprecated //Required for Hibernate
 	Contact() {
 	}
 	
 	public Contact(Name name) {
 		this.name = name;
+	}
+	
+	public Contact(Name name, Address workAddress) {
+		this.name = name;
+		this.workAddress = workAddress;
 	}
 
 	public Long getId() {
@@ -34,6 +42,14 @@ public class Contact {
 
 	public void setName(Name name) {
 		this.name = name;
+	}
+
+	public Address getWorkAddress() {
+		return workAddress;
+	}
+
+	public void setWorkAddress(Address workAddress) {
+		this.workAddress = workAddress;
 	}
 
 
