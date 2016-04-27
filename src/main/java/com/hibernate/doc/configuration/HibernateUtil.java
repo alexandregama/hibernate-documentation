@@ -21,7 +21,8 @@ public class HibernateUtil {
 				.addAnnotatedClass(com.hibernate.doc.user.User.class)
 				.addAnnotatedClass(com.hibernate.doc.any.Bus.class)
 				.addAnnotatedClass(com.hibernate.doc.any.Truck.class)
-				.addAnnotatedClass(com.hibernate.doc.any.SaleTransaction.class);
+				.addAnnotatedClass(com.hibernate.doc.any.SaleTransaction.class)
+				.addAnnotatedClass(com.hibernate.doc.contact.Contact.class);
 
 		SessionFactory sessionFactory = cfg.buildSessionFactory();
 		
