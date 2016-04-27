@@ -13,7 +13,7 @@ public class Address {
 	@Column(name = "line_2")
 	private String line2;
 	
-	@Embedded
+	@Embedded //Hibernate enable us to use a composite embeddable type normally
 	private ZipCode zipcode;
 	
 	@Deprecated //Required for Hibernate

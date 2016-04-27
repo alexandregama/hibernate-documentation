@@ -1,5 +1,8 @@
 package com.hibernate.doc.contact;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +19,24 @@ public class Contact {
 	@Embedded
 	private Name name;
 	
+	//When we use two or more times the same embeddable types hibernate requires us to use override attributes using @AttributeOverride
 	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "line1", column = @Column(name = "work_address_line_1")),
+			@AttributeOverride(name = "line2", column = @Column(name = "work_address_line_2")),
+			@AttributeOverride(name = "zipcode.code", column = @Column(name = "work_zipcode_code")),
+			@AttributeOverride(name = "zipcode.plus", column = @Column(name = "work_zipcode_plus"))
+	})
 	private Address workAddress;
+	
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "line1", column = @Column(name = "house_address_line_1")),
+			@AttributeOverride(name = "line2", column = @Column(name = "house_address_line_2")),
+			@AttributeOverride(name = "zipcode.code", column = @Column(name = "house_zipcode_code")),
+			@AttributeOverride(name = "zipcode.plus", column = @Column(name = "house_zipcode_plus"))
+	})
+	private Address houseAddress;
 	
 	@Deprecated //Required for Hibernate
 	Contact() {
@@ -50,6 +69,14 @@ public class Contact {
 
 	public void setWorkAddress(Address workAddress) {
 		this.workAddress = workAddress;
+	}
+
+	public Address getHouseAddress() {
+		return houseAddress;
+	}
+
+	public void setHouseAddress(Address houseAddress) {
+		this.houseAddress = houseAddress;
 	}
 
 
